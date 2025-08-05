@@ -1,7 +1,7 @@
 import React from 'react';
-import { Bell, Settings, Search, Filter } from 'lucide-react';
+import { Bell, Settings, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import Search from '../Sidebar/Search'; // ✅ Custom Search component with CommandMenu
 
 const TopBar = ({ 
   timeRange, 
@@ -19,22 +19,13 @@ const TopBar = ({
   ];
 
   return (
-    <div className="flex items-center justify-between p-4 bg-card border-b border-border gap-4">
-      <div className="flex items-center space-x-4">
-        <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-          HR Interface Monitor
-        </h1>
-        <div className="flex items-center space-x-2">
-          {/* <Search className="h-4 w-4 text-muted-foreground" /> */}
-          <Input
-            placeholder="Search interfaces..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-64 bg-secondary border-border"
-          />
-        </div>
+    <div className="flex items-center justify-between p-6 bg-card border-b border-border gap-4">
+      {/* Search Bar */}
+      <div className="w-64">
+        <Search /> {/* Integrated search with CommandMenu */}
       </div>
 
+      {/* Right Controls */}
       <div className="flex items-center space-x-4">
         <Button
           variant="outline"

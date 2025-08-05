@@ -60,15 +60,16 @@ export default {
           foreground: '#1c1917',      // stone-950
         },
         sidebar: {
-          DEFAULT: '#1c1917',         // stone-950
-          foreground: '#f5f5f4',      // stone-100
-          primary: '#7c3aed',         // violet-600
-          'primary-foreground': '#ede9fe', // violet-100
-          accent: '#a8a29e',          // stone-400
-          'accent-foreground': '#ffffff', // white
-          border: '#3f3f46',          // stone-700
-          ring: '#7c3aed',            // violet-600
+          DEFAULT: '#f9f9f9',              // very light background (stone-50)
+          foreground: '#292524',           // stone-900 for high readability
+          primary: '#7c3aed',              // violet-600 (keep as primary accent)
+          'primary-foreground': '#f5f3ff', // violet-100 (subtle contrast on buttons or highlights)
+          accent: '#e7e5e4',               // stone-200 (light muted areas)
+          'accent-foreground': '#1c1917',  // stone-950 (strong readable text/icons)
+          border: '#e5e5e5',               // light gray border (stone-200)
+          ring: '#c4b5fd',                 // violet-300 (soft glow/ring effect)
         },
+
       },
 
       backgroundImage: {
