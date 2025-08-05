@@ -1,11 +1,11 @@
 import React from 'react';
-import { 
-  BarChart3, 
-  Database, 
-  Settings, 
-  AlertTriangle, 
-  Activity, 
-  Users, 
+import {
+  BarChart3,
+  Database,
+  Settings,
+  AlertTriangle,
+  Activity,
+  Users,
   FileText,
   TrendingUp
 } from 'lucide-react';
@@ -31,24 +31,6 @@ const Sidebar = ({ collapsed = false, onToggle }) => {
       description: 'Live execution logs'
     },
     {
-      title: 'Monitoring',
-      href: '/monitoring',
-      icon: Activity,
-      description: 'Real-time monitoring'
-    },
-    {
-      title: 'Analytics',
-      href: '/analytics',
-      icon: TrendingUp,
-      description: 'Advanced analytics'
-    },
-    {
-      title: 'Alerts',
-      href: '/alerts',
-      icon: AlertTriangle,
-      description: 'System alerts'
-    },
-    {
       title: 'Reports',
       href: '/reports',
       icon: FileText,
@@ -60,91 +42,80 @@ const Sidebar = ({ collapsed = false, onToggle }) => {
       icon: Users,
       description: 'User management'
     },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: Settings,
-      description: 'System settings'
-    }
   ];
 
   return (
-    <div className={cn(
-      "h-screen bg-sidebar border-r border-sidebar-border flex flex-col transition-all duration-300",
-      collapsed ? "w-16" : "w-64"
-    )}>
+    <div
+
+      className={cn(
+        'h-screen bg-sidebar text-sidebar-foreground border-r border-sidebar-border flex flex-col transition-all duration-300',
+        collapsed ? 'w-16' : 'w-64'
+      )}
+    >
       {/* Header */}
       <div className="p-4 border-b border-sidebar-border">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+            <Activity className="h-4 w-4 text-white" />
+          </div>
           {!collapsed && (
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Activity className="h-4 w-4 text-white" />
-              </div>
-              <span className="font-semibold text-sidebar-foreground">HR Monitor</span>
-            </div>
-          )}
-          {collapsed && (
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto">
-              <Activity className="h-4 w-4 text-white" />
-            </div>
+            <span className="ml-2 font-semibold text-sm">HR Monitor</span>
           )}
         </div>
       </div>
 
-      {/* Search */}
-      {!collapsed && (
-        <div className="p-4">
-          <Search />
+      {/* Scrollable Section */}
+      <div className="flex-1 overflow-hidden">
+        <div className="h-full overflow-y-auto scrollbar-none">
+
+          {/* Account Toggle */}
+          <div className="p-4 border-t border-sidebar-border">
+            <AccountToggle collapsed={collapsed} />
+          </div>
+          {/* Search */}
+          {!collapsed && (
+            <div className="p-4">
+              <Search />
+            </div>
+          )}
+
+          {/* Navigation */}
+          <nav className="p-2 space-y-1">
+            {navigationItems.map((item) => (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    'group flex items-center px-3 py-2 rounded-md transition-all duration-200',
+                    collapsed ? 'justify-center' : 'space-x-3',
+                    'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                    isActive &&
+                    'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm'
+                  )
+                }
+                title={collapsed ? item.title : undefined}
+              >
+                <item.icon className="h-5 w-5 shrink-0" />
+                {!collapsed && (
+                  <div className="flex flex-col overflow-hidden">
+                    <span className="text-sm font-medium truncate">{item.title}</span>
+                    <span className="text-xs text-sidebar-foreground/60 truncate">
+                      {item.description}
+                    </span>
+                  </div>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Route Select */}
+          {!collapsed && (
+            <div className="p-4">
+              <RouteSelect />
+            </div>
+          )}
         </div>
-      )}
-
-      {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2">
-        {navigationItems.map((item) => (
-          <NavLink
-            key={item.href}
-            to={item.href}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200",
-                "hover:bg-sidebar-accent text-sidebar-foreground hover:text-sidebar-accent-foreground",
-                isActive && "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm",
-                collapsed && "justify-center"
-              )
-            }
-            title={collapsed ? item.title : undefined}
-          >
-            <item.icon className="h-5 w-5 flex-shrink-0" />
-            {!collapsed && (
-              <div className="flex-1 min-w-0">
-                <div className="font-medium truncate">{item.title}</div>
-                <div className="text-xs text-sidebar-foreground/60 truncate">
-                  {item.description}
-                </div>
-              </div>
-            )}
-          </NavLink>
-        ))}
-      </nav>
-
-      {/* Route Select (System Status) */}
-      {!collapsed && (
-        <div className="p-4">
-          <RouteSelect />
-        </div>
-      )}
-
-      {/* Plan/Upgrade */}
-      {!collapsed && (
-        <div className="p-4">
-          <Plan />
-        </div>
-      )}
-
-      {/* Account Toggle */}
-      <div className="p-4 border-t border-sidebar-border">
-        <AccountToggle collapsed={collapsed} />
       </div>
     </div>
   );

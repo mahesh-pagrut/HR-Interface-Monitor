@@ -34,7 +34,7 @@ const StatCard = ({ title, value, change, icon: Icon, trend, status = 'default' 
   };
 
   return (
-    <Card className={`p-6 ${getStatusStyles()} hover:shadow-lg transition-all duration-300`}>
+    <Card className={`p-6 ${getStatusStyles()} hover:shadow-lg transition-all duration-300 mb-4`}>
       <div className="flex items-center justify-between">
         <div className="space-y-2">
           <p className="text-sm font-medium text-muted-foreground">{title}</p>

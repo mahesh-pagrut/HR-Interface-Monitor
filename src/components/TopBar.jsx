@@ -19,13 +19,13 @@ const TopBar = ({
   ];
 
   return (
-    <div className="flex items-center justify-between p-4 bg-card border-b border-border">
+    <div className="flex items-center justify-between p-4 bg-card border-b border-border gap-4">
       <div className="flex items-center space-x-4">
         <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
           HR Interface Monitor
         </h1>
         <div className="flex items-center space-x-2">
-          <Search className="h-4 w-4 text-muted-foreground" />
+          {/* <Search className="h-4 w-4 text-muted-foreground" /> */}
           <Input
             placeholder="Search interfaces..."
             value={searchTerm}
