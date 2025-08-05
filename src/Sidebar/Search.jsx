@@ -1,33 +1,32 @@
-import { useState } from 'react';
-import { FiCommand, FiSearch } from 'react-icons/fi';
+import React, { useState } from 'react';
+import { Search as SearchIcon, Command } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import CommandMenu from './CommandMenu';
 
 const Search = () => {
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [showCommandMenu, setShowCommandMenu] = useState(false);
 
   return (
     <>
-      <div className="bg-stone-200 mb-4 relative rounded flex items-center px-2 py-1.5 text-sm">
-        <FiSearch className="mr-2" />
-        <input
-          onFocus={(e) => {
-            e.target.blur();
-            setOpen(true);
-          }}
-          type="text"
-          placeholder="Search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full bg-transparent placeholder:text-stone-400 focus:outline-none"
-        />
+      <Button
+        variant="outline"
+        className="w-full justify-start text-muted-foreground bg-sidebar-background border-sidebar-border hover:bg-sidebar-accent"
+        onClick={() => setShowCommandMenu(true)}
+      >
+        <SearchIcon className="mr-2 h-4 w-4" />
+        <span>Search interfaces...</span>
+        <div className="ml-auto flex space-x-1">
+          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+            <span className="text-xs">⌘</span>K
+          </kbd>
+        </div>
+      </Button>
 
-        <span className="p-1 text-xs flex gap-0.5 items-center shadow bg-stone-50 rounded absolute right-1.5 top-1/2 -translate-y-1/2">
-          <FiCommand />K
-        </span>
-      </div>
-
-      <CommandMenu open={open} setOpen={setOpen} />
+      <CommandMenu 
+        open={showCommandMenu} 
+        onOpenChange={setShowCommandMenu} 
+      />
     </>
   );
 };

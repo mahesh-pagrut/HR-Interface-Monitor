@@ -65,31 +65,15 @@ export default {
 					error: 'hsl(var(--status-error))',
 					pending: 'hsl(var(--status-pending))'
 				},
-				stone: {
-					50: 'hsl(var(--stone-50))',
-					100: 'hsl(var(--stone-100))',
-					200: 'hsl(var(--stone-200))',
-					300: 'hsl(var(--stone-300))',
-					400: 'hsl(var(--stone-400))',
-					500: 'hsl(var(--stone-500))',
-					600: 'hsl(var(--stone-600))',
-					700: 'hsl(var(--stone-700))',
-					800: 'hsl(var(--stone-800))',
-					900: 'hsl(var(--stone-900))',
-					950: 'hsl(var(--stone-950))'
-				},
-				violet: {
-					50: 'hsl(var(--violet-50))',
-					100: 'hsl(var(--violet-100))',
-					200: 'hsl(var(--violet-200))',
-					300: 'hsl(var(--violet-300))',
-					400: 'hsl(var(--violet-400))',
-					500: 'hsl(var(--violet-500))',
-					600: 'hsl(var(--violet-600))',
-					700: 'hsl(var(--violet-700))',
-					800: 'hsl(var(--violet-800))',
-					900: 'hsl(var(--violet-900))',
-					950: 'hsl(var(--violet-950))'
+				sidebar: {
+					DEFAULT: 'hsl(var(--sidebar-background))',
+					foreground: 'hsl(var(--sidebar-foreground))',
+					primary: 'hsl(var(--sidebar-primary))',
+					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+					accent: 'hsl(var(--sidebar-accent))',
+					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+					border: 'hsl(var(--sidebar-border))',
+					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
 			backgroundImage: {
