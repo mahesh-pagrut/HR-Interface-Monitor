@@ -1,179 +1,79 @@
-import React from 'react';
-import { 
-  BarChart3, 
-  Database, 
-  Settings, 
-  AlertTriangle, 
-  Activity, 
-  Users, 
-  FileText,
-  Search,
-  TrendingUp,
-  Play,
-  Pause,
-  RefreshCw
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from '@/components/ui/command';
+import { Command } from 'cmdk';
+import { useEffect, useState } from 'react';
+import { FiEye, FiLink, FiLogOut, FiPhone, FiPlus, FiFilter, FiDatabase, FiActivity } from 'react-icons/fi';
 
-const CommandMenu = ({ open, onOpenChange }) => {
-  const navigate = useNavigate();
+const CommandMenu = ({ open, setOpen }) => {
+  const [value, setValue] = useState('');
 
-  const navigationCommands = [
-    {
-      icon: BarChart3,
-      title: 'Dashboard',
-      subtitle: 'View overview and analytics',
-      action: () => navigate('/')
-    },
-    {
-      icon: Database,
-      title: 'Interface Logs',
-      subtitle: 'Browse execution logs',
-      action: () => navigate('/logs')
-    },
-    {
-      icon: Activity,
-      title: 'Monitoring',
-      subtitle: 'Real-time system monitoring',
-      action: () => navigate('/monitoring')
-    },
-    {
-      icon: TrendingUp,
-      title: 'Analytics',
-      subtitle: 'Advanced analytics and reports',
-      action: () => navigate('/analytics')
-    },
-    {
-      icon: AlertTriangle,
-      title: 'Alerts',
-      subtitle: 'System alerts and notifications',
-      action: () => navigate('/alerts')
-    },
-    {
-      icon: FileText,
-      title: 'Reports',
-      subtitle: 'Generate and download reports',
-      action: () => navigate('/reports')
-    },
-    {
-      icon: Users,
-      title: 'Users',
-      subtitle: 'Manage users and permissions',
-      action: () => navigate('/users')
-    },
-    {
-      icon: Settings,
-      title: 'Settings',
-      subtitle: 'System configuration',
-      action: () => navigate('/settings')
-    }
-  ];
-
-  const actionCommands = [
-    {
-      icon: RefreshCw,
-      title: 'Refresh Dashboard',
-      subtitle: 'Reload all dashboard data',
-      action: () => window.location.reload()
-    },
-    {
-      icon: Play,
-      title: 'Start All Interfaces',
-      subtitle: 'Resume all paused interfaces',
-      action: () => console.log('Starting all interfaces...')
-    },
-    {
-      icon: Pause,
-      title: 'Pause All Interfaces',
-      subtitle: 'Temporarily pause all interfaces',
-      action: () => console.log('Pausing all interfaces...')
-    }
-  ];
-
-  const handleSelect = (action) => {
-    action();
-    onOpenChange(false);
-  };
-
-  React.useEffect(() => {
+  useEffect(() => {
     const down = (e) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        onOpenChange(true);
+        setOpen((prev) => !prev);
       }
     };
 
     document.addEventListener('keydown', down);
     return () => document.removeEventListener('keydown', down);
-  }, [onOpenChange]);
+  }, [setOpen]);
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Type a command or search..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        
-        <CommandGroup heading="Navigation">
-          {navigationCommands.map((command, index) => (
-            <CommandItem
-              key={index}
-              onSelect={() => handleSelect(command.action)}
-              className="flex items-center space-x-3 px-3 py-2"
-            >
-              <command.icon className="h-4 w-4" />
-              <div className="flex-1">
-                <div className="font-medium">{command.title}</div>
-                <div className="text-xs text-muted-foreground">{command.subtitle}</div>
-              </div>
-            </CommandItem>
-          ))}
-        </CommandGroup>
+    <Command.Dialog
+      open={open}
+      onOpenChange={setOpen}
+      label="Global Command Menu"
+      className="fixed inset-0 z-[10000] bg-stone-950/50"
+      onClick={() => setOpen(false)}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-lg shadow-xl border-stone-300 border overflow-hidden w-full max-w-lg mx-auto mt-12"
+      >
+        <Command.Input
+          value={value}
+          onValueChange={setValue}
+          placeholder="What do you need?"
+          className="relative border-b border-stone-300 p-3 text-lg w-full placeholder:text-stone-400 focus:outline-none"
+        />
+        <Command.List className="p-3">
+          <Command.Empty>
+            No results found for{' '}
+            <span className="text-violet-500">"{value}"</span>
+          </Command.Empty>
 
-        <CommandSeparator />
+          <Command.Group heading="Navigation" className="text-sm mb-3 text-stone-400">
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+              <FiDatabase />
+              Interface Logs
+            </Command.Item>
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+              <FiActivity />
+              Real-time Monitoring
+            </Command.Item>
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+              <FiFilter />
+              Advanced Filters
+            </Command.Item>
+          </Command.Group>
 
-        <CommandGroup heading="Actions">
-          {actionCommands.map((command, index) => (
-            <CommandItem
-              key={index}
-              onSelect={() => handleSelect(command.action)}
-              className="flex items-center space-x-3 px-3 py-2"
-            >
-              <command.icon className="h-4 w-4" />
-              <div className="flex-1">
-                <div className="font-medium">{command.title}</div>
-                <div className="text-xs text-muted-foreground">{command.subtitle}</div>
-              </div>
-            </CommandItem>
-          ))}
-        </CommandGroup>
+          <Command.Group heading="Actions" className="text-sm text-stone-400 mb-3">
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+              <FiPlus />
+              Add New Interface
+            </Command.Item>
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+              <FiPhone />
+              Contact Support
+            </Command.Item>
+          </Command.Group>
 
-        <CommandSeparator />
-
-        <CommandGroup heading="Quick Access">
-          <CommandItem onSelect={() => handleSelect(() => navigate('/logs?status=error'))}>
-            <AlertTriangle className="h-4 w-4 mr-3 text-destructive" />
-            <span>View Error Logs</span>
-          </CommandItem>
-          <CommandItem onSelect={() => handleSelect(() => navigate('/logs?status=running'))}>
-            <Activity className="h-4 w-4 mr-3 text-primary" />
-            <span>View Running Interfaces</span>
-          </CommandItem>
-          <CommandItem onSelect={() => handleSelect(() => navigate('/monitoring'))}>
-            <TrendingUp className="h-4 w-4 mr-3 text-success" />
-            <span>System Performance</span>
-          </CommandItem>
-        </CommandGroup>
-      </CommandList>
-    </CommandDialog>
+          <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:bg-stone-700 bg-stone-950 rounded items-center gap-2">
+            <FiLogOut />
+            Sign Out
+          </Command.Item>
+        </Command.List>
+      </div>
+    </Command.Dialog>
   );
 };
 

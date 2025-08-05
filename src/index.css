@@ -2,26 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* HR Monitoring Dashboard Design System */
+/* HR Monitoring Dashboard Design System - Clean & Modern */
 
 @layer base {
   :root {
-    /* Core Background & Text */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Core Background & Text - Light Theme */
+    --background: 0 0% 98%;
+    --foreground: 20 14% 4%;
 
     /* Card & Surface Colors */
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 4%;
 
-    /* Primary Brand - Monitoring Blue */
-    --primary: 217 91% 60%;
+    /* Primary Brand - Violet Accent */
+    --primary: 252 83% 57%;
     --primary-foreground: 0 0% 98%;
-    --primary-glow: 217 91% 70%;
+    --primary-glow: 252 83% 67%;
 
-    /* Secondary - Neutral */
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    /* Secondary - Stone */
+    --secondary: 20 6% 90%;
+    --secondary-foreground: 20 14% 4%;
 
     /* Success States */
     --success: 142 76% 36%;
@@ -30,81 +30,73 @@
 
     /* Warning States */
     --warning: 48 96% 53%;
-    --warning-foreground: 240 10% 3.9%;
+    --warning-foreground: 20 14% 4%;
 
     /* Error/Destructive States */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Muted Elements */
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    /* Muted Elements - Stone */
+    --muted: 20 6% 90%;
+    --muted-foreground: 25 5% 45%;
 
     /* Accent Colors */
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 20 6% 90%;
+    --accent-foreground: 20 14% 4%;
 
-    /* Borders & Inputs */
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 217 91% 60%;
+    /* Borders & Inputs - Stone */
+    --border: 20 5% 85%;
+    --input: 20 6% 90%;
+    --ring: 252 83% 57%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 70%));
+    --gradient-primary: linear-gradient(135deg, hsl(252 83% 57%), hsl(252 83% 67%));
     --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
-    --gradient-chart: linear-gradient(180deg, hsl(217 91% 60% / 0.8), hsl(217 91% 60% / 0.1));
+    --gradient-chart: linear-gradient(180deg, hsl(252 83% 57% / 0.8), hsl(252 83% 57% / 0.1));
 
     /* Shadows */
-    --shadow-glow: 0 0 20px hsl(217 91% 60% / 0.3);
+    --shadow-glow: 0 0 20px hsl(252 83% 57% / 0.3);
     --shadow-success: 0 0 20px hsl(142 76% 36% / 0.3);
-    --shadow-card: 0 4px 6px -1px hsl(240 10% 3.9% / 0.1), 0 2px 4px -1px hsl(240 10% 3.9% / 0.06);
+    --shadow-card: 0 1px 3px 0 hsl(20 14% 4% / 0.1), 0 1px 2px 0 hsl(20 14% 4% / 0.06);
 
     /* Interface Status Colors */
     --status-running: 142 76% 36%;
     --status-success: 142 76% 36%;
     --status-warning: 48 96% 53%;
     --status-error: 0 84% 60%;
-    --status-pending: 217 91% 60%;
+    --status-pending: 252 83% 57%;
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Sidebar */
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217 91% 60%;
-  }
+    /* Stone Color Palette */
+    --stone-50: 60 9% 98%;
+    --stone-100: 24 6% 95%;
+    --stone-200: 20 6% 90%;
+    --stone-300: 24 6% 83%;
+    --stone-400: 25 5% 64%;
+    --stone-500: 25 5% 45%;
+    --stone-600: 33 5% 32%;
+    --stone-700: 30 6% 25%;
+    --stone-800: 12 6% 15%;
+    --stone-900: 24 10% 10%;
+    --stone-950: 20 14% 4%;
 
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
+    /* Violet Color Palette */
+    --violet-50: 270 100% 98%;
+    --violet-100: 269 100% 95%;
+    --violet-200: 269 100% 92%;
+    --violet-300: 268 100% 84%;
+    --violet-400: 270 95% 75%;
+    --violet-500: 252 83% 57%;
+    --violet-600: 258 90% 66%;
+    --violet-700: 262 83% 58%;
+    --violet-800: 263 70% 50%;
+    --violet-900: 264 67% 40%;
+    --violet-950: 262 80% 29%;
   }
 }
 

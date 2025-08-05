@@ -181,45 +181,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <TopBar
-        timeRange={timeRange}
-        setTimeRange={setTimeRange}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        onAdvancedFilters={handleAdvancedFilters}
-      />
-      
-      <div className="container mx-auto p-6 space-y-6">
-        {/* Summary Statistics */}
-        <StatCards summaryData={summaryData} timeRange={timeRange} />
-        
-        {/* Main Grid Layout */}
-        <Grid>
-          {/* Activity Chart */}
-          <div className="lg:col-span-2">
-            <ActivityGraph 
-              chartData={chartData} 
-              title="Interface Activity Trends" 
-            />
-          </div>
-          
-          {/* Usage Radar - moved to span full width when needed */}
-          <div className="lg:col-span-2">
-            <UsageRadar 
-              summaryData={summaryData} 
-              chartData={chartData} 
-            />
-          </div>
-        </Grid>
-
-        {/* Recent Transactions Table */}
-        <RecentTransactions 
-          data={logsData}
-          onRefresh={handleRefreshLogs}
-          isLoading={isLoading.logs}
-        />
-      </div>
+    <div className="h-full">
+      <TopBar />
+      <Grid />
     </div>
   );
 };
