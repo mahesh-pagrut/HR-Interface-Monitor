@@ -25,92 +25,59 @@ const AccountToggle = ({ collapsed = false }) => {
     .join('')
     .toUpperCase();
 
-  if (collapsed) {
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="w-10 h-10 p-0 hover:bg-gray-100 rounded-xl">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="bg-gradient-to-br from-purple-500 to-purple-600 text-white text-xs">
-                {initials}
-              </AvatarFallback>
-            </Avatar>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent side="right" align="start" className="w-56 shadow-lg border-gray-200">
-          <DropdownMenuLabel>
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-semibold text-gray-900">{user.name}</p>
-              <p className="text-xs text-gray-500">{user.email}</p>
-            </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="hover:bg-gray-50">
-            <User className="mr-3 h-4 w-4 text-gray-500" />
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem className="hover:bg-gray-50">
-            <Settings className="mr-3 h-4 w-4 text-gray-500" />
-            Settings
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-red-600 hover:bg-red-50">
-            <LogOut className="mr-3 h-4 w-4" />
-            Log out
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="w-full justify-start p-3 h-auto bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200"
+          className={`w-full px-2 py-2 h-auto transition-colors ${collapsed ? 'justify-center bg-muted hover:bg-muted/70' : 'justify-start hover:bg-muted'
+            }`}
         >
-          <div className="flex items-center space-x-3 w-full">
-            <Avatar className="h-10 w-10">
+          <div className={`flex items-center w-full ${collapsed ? 'justify-center' : 'space-x-3'}`}>
+            <Avatar className="h-8 w-8 mr-2">
               <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+              <AvatarFallback className="bg-primary text-primary-foreground">
                 {initials}
               </AvatarFallback>
             </Avatar>
-            <div className="flex-1 text-left min-w-0">
-              <p className="text-sm font-semibold text-gray-900 truncate">{user.name}</p>
-              <p className="text-xs text-gray-500 truncate">{user.role}</p>
-            </div>
-            <ChevronDown className="h-4 w-4 text-gray-400" />
+            {!collapsed && (
+              <>
+                <div className="flex-1 text-left min-w-0">
+                  <p className="text-sm font-medium truncate">{user.name}</p>
+                  <p className="text-xs text-muted-foreground truncate">{user.role}</p>
+                </div>
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              </>
+            )}
           </div>
         </Button>
+
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent side="top" align="end" className="w-56 shadow-lg border-gray-200">
+      <DropdownMenuContent side="top" align="end" className="w-56 z-50 shadow-md bg-white border border-border">
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-semibold text-gray-900">{user.name}</p>
-            <p className="text-xs text-gray-500">{user.email}</p>
+            <p className="text-sm font-medium truncate">{user.name}</p>
+            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
           </div>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="hover:bg-gray-50">
-          <User className="mr-3 h-4 w-4 text-gray-500" />
+        <DropdownMenuItem>
+          <User className="mr-2 h-4 w-4" />
           Profile
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="hover:bg-gray-50">
-          <Settings className="mr-3 h-4 w-4 text-gray-500" />
+        <DropdownMenuItem>
+          <Settings className="mr-2 h-4 w-4" />
           Settings
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="text-red-600 hover:bg-red-50">
-          <LogOut className="mr-3 h-4 w-4" />
+        <DropdownMenuItem className="text-destructive">
+          <LogOut className="mr-2 h-4 w-4" />
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

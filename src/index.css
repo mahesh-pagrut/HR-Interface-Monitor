@@ -2,129 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern HR Dashboard Design System */
+/* HR Monitoring Dashboard Design System */
 
 @layer base {
   :root {
-    /* Light Modern Theme */
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    
-    /* Cards & Surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    
-    /* Primary - Modern Purple */
-    --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 262 100% 96%;
-    
-    /* Secondary */
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 240 6% 10%;
-    
-    /* Success */
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-    --success-light: 142 86% 95%;
-    
-    /* Warning */
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --warning-light: 48 100% 96%;
-    
-    /* Error */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --destructive-light: 0 100% 97%;
-    
-    /* Muted */
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%;
-    
-    /* Borders */
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 262 83% 58%;
-    
-    /* Sidebar - Light Gray */
-    --sidebar-background: 240 10% 98%;
-    --sidebar-foreground: 240 10% 15%;
-    --sidebar-primary: 262 83% 58%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 6% 90%;
-    --sidebar-accent-foreground: 240 10% 15%;
-    --sidebar-border: 240 6% 90%;
-    --sidebar-muted: 240 5% 96%;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(280 100% 70%));
-    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 86% 40%));
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    
-    --radius: 0.5rem;
-  }
-  
-  .dark {
+    /* Core Background & Text */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
+
+    /* Card & Surface Colors */
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
-    --primary: 262 83% 58%;
+
+    /* Primary Brand - Monitoring Blue */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 98%;
-    --primary-light: 262 83% 8%;
+    --primary-glow: 217 91% 70%;
+
+    /* Secondary - Neutral */
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
+
+    /* Success States */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --success-glow: 142 76% 46%;
+
+    /* Warning States */
+    --warning: 48 96% 53%;
+    --warning-foreground: 240 10% 3.9%;
+
+    /* Error/Destructive States */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Muted Elements */
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
+
+    /* Accent Colors */
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    /* Borders & Inputs */
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
+    --ring: 217 91% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 70%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
+    --gradient-chart: linear-gradient(180deg, hsl(217 91% 60% / 0.8), hsl(217 91% 60% / 0.1));
+
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(217 91% 60% / 0.3);
+    --shadow-success: 0 0 20px hsl(142 76% 36% / 0.3);
+    --shadow-card: 0 4px 6px -1px hsl(240 10% 3.9% / 0.1), 0 2px 4px -1px hsl(240 10% 3.9% / 0.06);
+
+    /* Interface Status Colors */
+    --status-running: 142 76% 36%;
+    --status-success: 142 76% 36%;
+    --status-warning: 48 96% 53%;
+    --status-error: 0 84% 60%;
+    --status-pending: 217 91% 60%;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 262 83% 58%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-muted: 240 3.7% 15.9%;
+    --sidebar-ring: 217 91% 60%;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-}
-
-/* Custom Components */
-@layer components {
-  .sidebar-item {
-    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200;
-    @apply text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
-    @apply focus:outline-none focus:ring-2 focus:ring-ring;
-  }
-  
-  .sidebar-item-active {
-    @apply bg-sidebar-primary text-sidebar-primary-foreground shadow-sm;
-  }
-  
-  .card-modern {
-    @apply bg-card border border-border rounded-xl shadow-sm;
-  }
-  
-  .input-modern {
-    @apply bg-background border border-input rounded-lg px-3 py-2;
-    @apply focus:ring-2 focus:ring-ring focus:border-transparent;
-    @apply transition-all duration-200;
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
   }
 }
 
