@@ -117,62 +117,86 @@ const CommandMenu = ({ open, onOpenChange }) => {
   }, [onOpenChange]);
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Type a command or search..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+    <CommandDialog 
+      open={open} 
+      onOpenChange={onOpenChange}
+      className="animate-fade-in"
+    >
+      <div className="bg-white rounded-xl shadow-2xl border border-gray-200">
+        <div className="flex items-center border-b border-gray-100 px-4">
+          <Search className="mr-3 h-4 w-4 shrink-0 text-gray-400" />
+          <CommandInput 
+            placeholder="Type a command or search..." 
+            className="flex h-12 w-full bg-transparent py-3 text-sm outline-none placeholder:text-gray-400 border-0"
+          />
+        </div>
         
-        <CommandGroup heading="Navigation">
-          {navigationCommands.map((command, index) => (
-            <CommandItem
-              key={index}
-              onSelect={() => handleSelect(command.action)}
-              className="flex items-center space-x-3 px-3 py-2"
+        <CommandList className="max-h-80 overflow-y-auto p-2">
+          <CommandEmpty className="py-8 text-center text-sm text-gray-500">
+            No results found.
+          </CommandEmpty>
+          
+          <CommandGroup heading="Navigation">
+            {navigationCommands.map((command, index) => (
+              <CommandItem
+                key={index}
+                onSelect={() => handleSelect(command.action)}
+                className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 cursor-pointer"
+              >
+                <command.icon className="h-4 w-4 text-gray-600" />
+                <div className="flex-1">
+                  <div className="font-medium text-gray-900">{command.title}</div>
+                  <div className="text-xs text-gray-500">{command.subtitle}</div>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+
+          <CommandSeparator className="my-2" />
+
+          <CommandGroup heading="Actions">
+            {actionCommands.map((command, index) => (
+              <CommandItem
+                key={index}
+                onSelect={() => handleSelect(command.action)}
+                className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 cursor-pointer"
+              >
+                <command.icon className="h-4 w-4 text-gray-600" />
+                <div className="flex-1">
+                  <div className="font-medium text-gray-900">{command.title}</div>
+                  <div className="text-xs text-gray-500">{command.subtitle}</div>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+
+          <CommandSeparator className="my-2" />
+
+          <CommandGroup heading="Quick Access">
+            <CommandItem 
+              onSelect={() => handleSelect(() => navigate('/logs?status=error'))}
+              className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-red-50 cursor-pointer"
             >
-              <command.icon className="h-4 w-4" />
-              <div className="flex-1">
-                <div className="font-medium">{command.title}</div>
-                <div className="text-xs text-muted-foreground">{command.subtitle}</div>
-              </div>
+              <AlertTriangle className="h-4 w-4 text-red-500" />
+              <span className="text-gray-900">View Error Logs</span>
             </CommandItem>
-          ))}
-        </CommandGroup>
-
-        <CommandSeparator />
-
-        <CommandGroup heading="Actions">
-          {actionCommands.map((command, index) => (
-            <CommandItem
-              key={index}
-              onSelect={() => handleSelect(command.action)}
-              className="flex items-center space-x-3 px-3 py-2"
+            <CommandItem 
+              onSelect={() => handleSelect(() => navigate('/logs?status=running'))}
+              className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-blue-50 cursor-pointer"
             >
-              <command.icon className="h-4 w-4" />
-              <div className="flex-1">
-                <div className="font-medium">{command.title}</div>
-                <div className="text-xs text-muted-foreground">{command.subtitle}</div>
-              </div>
+              <Activity className="h-4 w-4 text-blue-500" />
+              <span className="text-gray-900">View Running Interfaces</span>
             </CommandItem>
-          ))}
-        </CommandGroup>
-
-        <CommandSeparator />
-
-        <CommandGroup heading="Quick Access">
-          <CommandItem onSelect={() => handleSelect(() => navigate('/logs?status=error'))}>
-            <AlertTriangle className="h-4 w-4 mr-3 text-destructive" />
-            <span>View Error Logs</span>
-          </CommandItem>
-          <CommandItem onSelect={() => handleSelect(() => navigate('/logs?status=running'))}>
-            <Activity className="h-4 w-4 mr-3 text-primary" />
-            <span>View Running Interfaces</span>
-          </CommandItem>
-          <CommandItem onSelect={() => handleSelect(() => navigate('/monitoring'))}>
-            <TrendingUp className="h-4 w-4 mr-3 text-success" />
-            <span>System Performance</span>
-          </CommandItem>
-        </CommandGroup>
-      </CommandList>
+            <CommandItem 
+              onSelect={() => handleSelect(() => navigate('/monitoring'))}
+              className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-green-50 cursor-pointer"
+            >
+              <TrendingUp className="h-4 w-4 text-green-500" />
+              <span className="text-gray-900">System Performance</span>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </div>
     </CommandDialog>
   );
 };

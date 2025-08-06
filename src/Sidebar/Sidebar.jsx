@@ -7,16 +7,16 @@ import {
   Activity, 
   Users, 
   FileText,
-  TrendingUp
+  TrendingUp,
+  X
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import RouteSelect from './RouteSelect';
 import AccountToggle from './AccountToggle';
 import Search from './Search';
-import Plan from './Plan';
+import { Button } from '@/components/ui/button';
 
-const Sidebar = ({ collapsed = false, onToggle }) => {
+const Sidebar = ({ collapsed = false, onToggle, onClose }) => {
   const navigationItems = [
     {
       title: 'Dashboard',
@@ -69,76 +69,93 @@ const Sidebar = ({ collapsed = false, onToggle }) => {
   ];
 
   return (
-    <div className={cn(
-      "h-screen bg-sidebar border-r border-sidebar-border flex flex-col transition-all duration-300",
-      collapsed ? "w-16" : "w-64"
-    )}>
+    <div className="h-full bg-white border-r border-gray-200 flex flex-col w-full">
       {/* Header */}
-      <div className="p-4 border-b border-sidebar-border">
+      <div className="p-6 border-b border-gray-100">
         <div className="flex items-center justify-between">
           {!collapsed && (
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Activity className="h-4 w-4 text-white" />
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Activity className="h-5 w-5 text-white" />
               </div>
-              <span className="font-semibold text-sidebar-foreground">HR Monitor</span>
+              <div>
+                <h2 className="font-bold text-gray-900 text-lg">HR Monitor</h2>
+                <p className="text-xs text-gray-500">Interface Dashboard</p>
+              </div>
             </div>
           )}
           {collapsed && (
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto">
-              <Activity className="h-4 w-4 text-white" />
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto shadow-lg">
+              <Activity className="h-5 w-5 text-white" />
             </div>
+          )}
+          
+          {/* Mobile Close Button */}
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="lg:hidden hover:bg-gray-100"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           )}
         </div>
       </div>
+
       {/* Account Toggle */}
-      <div className="p-4 border-t border-sidebar-border">
-        <AccountToggle collapsed={collapsed} />
-      </div>
+      {!collapsed && (
+        <div className="p-4">
+          <AccountToggle collapsed={collapsed} />
+        </div>
+      )}
 
       {/* Search */}
       {!collapsed && (
-        <div className="p-4">
+        <div className="px-4 pb-4">
           <Search />
         </div>
       )}
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className="flex-1 px-4 py-2 space-y-1">
         {navigationItems.map((item) => (
           <NavLink
             key={item.href}
             to={item.href}
+            onClick={onClose} // Close mobile menu on navigation
             className={({ isActive }) =>
               cn(
-                "flex items-center space-x-3 px-3 py-2 rounded-lg transition-all duration-200",
-                "hover:bg-sidebar-accent text-sidebar-foreground hover:text-sidebar-accent-foreground",
-                isActive && "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm",
-                collapsed && "justify-center"
+                "sidebar-item",
+                isActive && "sidebar-item-active bg-purple-50 text-purple-700 border-l-4 border-purple-500",
+                collapsed && "justify-center px-2"
               )
             }
             title={collapsed ? item.title : undefined}
           >
-            <item.icon className="h-4 w-4 mr-2 flex-shrink-0" />
+            <item.icon className={cn("h-5 w-5 shrink-0", collapsed ? "" : "mr-3")} />
             {!collapsed && (
               <div className="flex-1 min-w-0">
-                <div className="font-medium truncate">{item.title}</div>
-                {/* <div className="text-xs text-sidebar-foreground/60 truncate">
+                <div className="font-medium text-sm truncate">{item.title}</div>
+                <div className="text-xs text-gray-500 truncate">
                   {item.description}
-                </div> */}
+                </div>
               </div>
             )}
           </NavLink>
         ))}
       </nav>
 
-      {/* Route Select (System Status) */}
+      {/* Footer Status */}
       {!collapsed && (
-        <div className="p-4">
-          <RouteSelect />
+        <div className="p-4 border-t border-gray-100">
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span>All systems operational</span>
+          </div>
         </div>
       )}
-
     </div>
   );
 };

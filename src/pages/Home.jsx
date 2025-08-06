@@ -1,14 +1,8 @@
 import React from 'react';
 import Dashboard from '../components/Dashboard';
-// import Sidebar from '../Sidebar/Sidebar';
 
 const Home = () => {
-
-  return (
-    <div>
-    <Dashboard />;
-    </div>
-    )
+  return <Dashboard />;
 };
 
 export default Home;
